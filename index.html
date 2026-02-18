@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Control Panel</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* FULL SCREEN LAYOUT */
+        body {
+            height: 100vh;
+            display: flex;
+        }
+
+        /* LEFT PANEL */
+        .left {
+            flex: 1;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .left h1 {
+            font-size: 40px;
+            text-transform: uppercase;
+        }
+
+        .left p {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        /* RIGHT PANEL */
+        .right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f6f9;
+        }
+
+        .login-box {
+            width: 350px;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+
+        .title {
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        /* ALIGN RADIO & CHECKBOX */
+        .form-group {
+            margin: 10px 0;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .radio-group input,
+        .checkbox-group input {
+            width: auto;
+        }
+
+        /* BUTTON STYLE */
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            background: #243b55;
+            color: white;
+        }
+
+        button:hover {
+            background: green;
+        }
+
+        progress {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #243b55;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- LEFT SIDE -->
+<div class="left">
+    <h1>Admin Portal</h1>
+    <p>Secure Control Panel Access</p>
+</div>
+
+<!-- RIGHT SIDE -->
+<div class="right">
+
+    <div class="login-box">
+
+        <div class="title">Admin Login</div>
+
+        <form id="adminForm">
+
+            <!-- REQUIRED NAME -->
+            <input type="text" id="name" placeholder="Admin Name" required>
+
+            <!-- EMAIL VALIDATION -->
+            <input type="email" placeholder="Admin Email" required>
+
+            <!-- NUMBER RANGE -->
+            <input type="number" id="level" min="1" max="10"
+                   placeholder="Security Level (1-10)">
+
+            <!-- RADIO BUTTONS -->
+            <div class="form-group">
+                <label class="radio-group">
+                    <input type="radio" name="role" checked>
+                    <span>Super Admin</span>
+                </label>
+
+                <label class="radio-group">
+                    <input type="radio" name="role">
+                    <span>Moderator</span>
+                </label>
+            </div>
+
+            <!-- CHECKBOX -->
+            <div class="form-group">
+                <label class="checkbox-group">
+                    <input type="checkbox" required>
+                    <span>Accept Terms</span>
+                </label>
+            </div>
+
+            <!-- PROGRESS BAR -->
+            <progress value="60" max="100"></progress>
+
+            <button type="button" onclick="showAlert()">Alert</button>
+            <button type="button" id="loginBtn" onclick="changeText()">Login</button>
+            <button type="submit">Submit</button>
+
+        </form>
+
+        <p id="message"></p>
+
+    </div>
+
+</div>
+
+<script>
+
+    // PRINT CURRENT DATE
+    console.log("Login Page Loaded On:", new Date());
+
+    // ALERT FUNCTION
+    function showAlert() {
+        alert("Admin Access Required!");
+    }
+
+    // CHANGE BUTTON TEXT
+    function changeText() {
+        document.getElementById("loginBtn").innerHTML = "Checking...";
+    }
+
+    // PREVENT FORM SUBMISSION
+    document.getElementById("adminForm").addEventListener("submit", function(event){
+
+        event.preventDefault();
+
+        // GET INPUT VALUE
+        var name = document.getElementById("name").value;
+
+        // DISPLAY NAME
+        document.getElementById("message").innerHTML =
+            "Welcome, " + name + " 👋";
+
+        // CHANGE BACKGROUND AFTER LOGIN
+        document.body.style.backgroundColor = "#e0ffe0";
+
+        // CHECK NUMBER
+        var level = document.getElementById("level").value;
+        if(level > 10){
+            console.log("Invalid Level");
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
